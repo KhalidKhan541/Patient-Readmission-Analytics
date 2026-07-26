@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "readmission-analytics"
+version = "1.0.0"
+description = "Patient Readmission Analytics Pipeline"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24.0",
+    "pandas>=2.0.0",
+    "sqlalchemy>=2.0.0",
+    "pyyaml>=6.0",
+]
+
+[tool.setuptools.packages.find]
+include = ["readmission_analytics*"]
+
+[project.scripts]
+readmission-analytics = "readmission_analytics.run:main"
