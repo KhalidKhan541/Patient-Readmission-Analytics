@@ -1,0 +1,38 @@
+database:
+  url: sqlite:///data/healthcare.db
+
+data:
+  n_patients: 5000
+  n_admissions: 20000
+  n_providers: 100
+  seed: 42
+
+quality_checks:
+  patients:
+    not_null: [patient_id, mrn, name]
+    unique: [patient_id, mrn]
+  admissions:
+    not_null: [admission_id, patient_id, admission_date]
+    date_order: [admission_date, discharge_date]
+
+readmission:
+  window_days: 30
+  min_admissions: 2
+
+icd:
+  version: 10
+  group_by: chapter
+
+cost:
+  outlier_percentile: 95
+
+provider:
+  min_patients: 10
+  weights:
+    readmission_rate: 0.4
+    avg_cost: 0.3
+    avg_los: 0.3
+
+output:
+  output_dir: outputs
+  save_csv: true
